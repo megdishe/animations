@@ -36,9 +36,15 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         backgroundColor: 'green',
         transform: 'translateX(0px) scale(0.5)'
       })),
-      transition('shrunken <=> *', animate(500, style({
-        borderRadius: '50px'
-      })))
+      transition('shrunken <=> *', [
+        style({
+          backgroundColor: 'orange',
+        }),
+        animate(1000, style({
+          borderRadius: '50px'
+        })),
+        animate(500)
+      ])
     ]),
   ]
 
@@ -46,7 +52,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
   state = 'normal';
-  wildState= 'normal';
+  wildState = 'normal';
 
   onDelete(item: any) {
     const index = this.list.indexOf(item);
@@ -63,6 +69,6 @@ export class AppComponent {
   }
 
   onShrink() {
-    this.wildState= 'shrunken'
+    this.wildState = 'shrunken'
   }
 }
