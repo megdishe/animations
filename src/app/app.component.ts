@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {NgFor} from "@angular/common";
-import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
+import {animate, group, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
@@ -74,12 +74,20 @@ import {animate, keyframes, state, style, transition, trigger} from "@angular/an
             offset: 1,
           })),
         ]))
-        ]),
-      transition('* => void', [animate(200, style({
-        opacity: 0,
-        backgroundColor: 'red',
-        transform: 'translateX(100px)'
-      }))])
+      ]),
+      transition('* => void', [
+        group([
+          animate(800,
+            style({
+              color: 'white'
+            })),
+          animate(1000, style({
+            opacity: 0,
+            backgroundColor: 'red',
+            transform: 'translateX(100px)'
+          }))
+        ])
+      ])
     ]),
   ]
 
