@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {NgFor} from "@angular/common";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
@@ -47,14 +47,36 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
       ])
     ]),
     trigger('listItemState', [
-      transition('void => *', [style({
-        opacity: 1,
-        backgroundColor: 'green',
-        transform: 'translateX(-100px)'
-      }),
-        animate(300)]),
+      transition('void => *', [
+        animate(1000, keyframes([
+          style(({
+            transform: 'translateX(-100px)',
+            opacity: 0,
+            backgroundColor: '#c4f3c5',
+            offset: 0,
+          })),
+          style(({
+            transform: 'translateX(-50px)',
+            opacity: 0.5,
+            backgroundColor: '#73e67b',
+            offset: 0.3,
+          })),
+          style(({
+            transform: 'translateX(-20px)',
+            opacity: 1,
+            backgroundColor: '#04e414',
+            offset: 0.8,
+          })),
+          style(({
+            transform: 'translateX(0px)',
+            opacity: 1,
+            backgroundColor: 'green',
+            offset: 1,
+          })),
+        ]))
+        ]),
       transition('* => void', [animate(200, style({
-        opacity: 1,
+        opacity: 0,
         backgroundColor: 'red',
         transform: 'translateX(100px)'
       }))])
