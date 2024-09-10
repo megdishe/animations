@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {NgFor} from "@angular/common";
-import {state, style, trigger} from "@angular/animations";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,11 @@ import {state, style, trigger} from "@angular/animations";
       state('highlighted', style({
         backgroundColor: 'red',
         transform: 'translateX(100px)'
-      }))])
+      })),
+      // transition('normal => highlighted',[ animate(300)]),
+      //transition('highlighted => normal',[ animate(200)])
+      transition('* => *', [animate(300)])
+    ])
   ]
 
 })
