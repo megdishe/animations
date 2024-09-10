@@ -22,13 +22,31 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
       // transition('normal => highlighted',[ animate(300)]),
       //transition('highlighted => normal',[ animate(200)])
       transition('* => *', [animate(300)])
-    ])
+    ]),
+    trigger('wildState', [
+      state('normal', style({
+        backgroundColor: 'blue',
+        transform: 'translateX(0px) scale(1)'
+      })),
+      state('highlighted', style({
+        backgroundColor: 'red',
+        transform: 'translateX(100px) scale(1)'
+      })),
+      state('shrunken', style({
+        backgroundColor: 'green',
+        transform: 'translateX(0px) scale(0.5)'
+      })),
+      transition('shrunken <=> *', animate(500, style({
+        borderRadius: '50px'
+      })))
+    ]),
   ]
 
 })
 export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
   state = 'normal';
+  wildState= 'normal';
 
   onDelete(item: any) {
     const index = this.list.indexOf(item);
@@ -37,10 +55,14 @@ export class AppComponent {
 
   onAnimate() {
     this.state = this.state == 'normal' ? 'highlighted' : 'normal';
+    this.wildState = this.wildState == 'normal' ? 'highlighted' : 'normal';
   }
 
   onAdd(item: any) {
     this.list.push(item);
   }
 
+  onShrink() {
+    this.wildState= 'shrunken'
+  }
 }
