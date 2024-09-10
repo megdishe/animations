@@ -46,6 +46,19 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         animate(500)
       ])
     ]),
+    trigger('listItemState', [
+      transition('void => *', [style({
+        opacity: 1,
+        backgroundColor: 'green',
+        transform: 'translateX(-100px)'
+      }),
+        animate(300)]),
+      transition('* => void', [animate(200, style({
+        opacity: 1,
+        backgroundColor: 'red',
+        transform: 'translateX(100px)'
+      }))])
+    ]),
   ]
 
 })
